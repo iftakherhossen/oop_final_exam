@@ -51,8 +51,9 @@ def user_menu():
 def admin_menu():
     name = input("Enter Your Name: ")
     email = input("Enter Your Email: ")
-    admin = Admin(name, email)
-    options = ["1. Create User Account", "2. Delete User Account", "3. View ALL User Accounts", "4. View Total Available Balance", "5. View the Total Loan Amount", "6. Manage Loan Feature", "7. Exit"]
+    designation = input("Enter Your Designation: ")
+    admin = Admin(name, email, designation)
+    options = ["1. Create New Admin Account", "2. Delete User Account", "3. View ALL User Accounts", "4. View Total Available Balance", "5. View the Total Loan Amount", "6. Manage Loan Feature", "7. Exit"]
     
     while True:
         print(f"Welcome Admin, {name}")
@@ -64,11 +65,9 @@ def admin_menu():
         
         if choice == 1:
             name = input("Enter Your Name: ")
-            email = input("Enter Your Email: ")
-            address = input("Enter Your Address: ")
-            account_type =  input("Enter Your Account Type (Savings / Current): ")        
-            user = Account(name, email, address, account_type)
-            admin.create_new_account(abc_bank, user)
+            email = input("Enter Your Email: ")        
+            admin = Account(name, email)
+            admin.create_new_admin(abc_bank, admin)
         
         elif choice == 2:
             account_no = int(input("Enter User Account No to Delete: "))

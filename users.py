@@ -1,12 +1,11 @@
-from abc import ABC
 import random
 from datetime import datetime
 
 now = datetime.now()
-timestamp = now.strftime("%H:%M:%S, %d/%m/%Y")
-
-class Account(ABC):
-    def __init__(self, name, email, address, account_type):
+timestamp = now.strftime("%H:%M:%S, %d/%m/%Y")    
+    
+class User:  
+    def __init__(self, name, email, address, account_type, bank):
         self.name = name
         self.email = email
         self.address = address
@@ -15,17 +14,9 @@ class Account(ABC):
         self.account_no = self.generate_acc_no()
         self.transaction_history = []
         self.loan_count = 0
-        self.loan_balance = 0
-        
-    def generate_acc_no(self):
-        return random.randint(10000, 99999)
-    
-    
-class User(Account):  
-    def __init__(self, name, email, address, account_type, bank):
-        super().__init__(name, email, address, account_type)        
+        self.loan_balance = 0       
         self.bank = bank
-        self.bank.create_new_account(self)
+        self.bank.add_user_account(self)
         
     def generate_acc_no(self):
         return random.randint(10000, 99999)
@@ -87,14 +78,14 @@ class User(Account):
         else:
             print("ABC Bank is Bankrupt!!!")
     
-    
 class Admin:   
-    def __init__(self, name, email):
+    def __init__(self, name, email, designation):
         self.name = name
-        self.email = email   
+        self.email = email
+        self.designation = designation 
                 
-    def create_new_account(self, bank, user):
-        bank.create_new_account(user)
+    def create_new_admin(self, bank, admin):
+        bank.create_new_admin(admin)
         
     def delete_user_account(self, bank, account_no):
         bank.delete_user_account(account_no)
